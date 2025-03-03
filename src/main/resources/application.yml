@@ -10,9 +10,11 @@ spring:
       - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
   mvc:
     throw-exception-if-no-handler-found: true
-  sleuth:
-    sampler:
-      probability: 1.0
+  security:
+    user:
+      name: ${USER_NAME}
+      password: ${USER_PASSWORD}
+      roles: ACTUATOR_ADMIN
 server:
   max-http-request-header-size: 16KB
 management:
@@ -23,6 +25,17 @@ management:
     web:
       exposure:
         include: '*' #TODO enable only info and health for security purposes. Consider that we may want to still access other actuator endpoints securely.
+  metrics:
+    tags: # adding application-specific tags metrics
+        application: ${spring.application.name}
 logging:
   pattern:
     level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+
+api:
+  base:
+    url: https://jsonplaceholder.typicode.com
+  posts:
+    url: ${api.base.url}/posts
+  comments:
+    url: ${api.base.url}/comments

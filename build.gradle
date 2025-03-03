@@ -39,31 +39,41 @@ ext {
 
 dependencies {
 
+    // ADDED Spring Security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
     // TODO Clean up unused dependencies. Add comments on consideration on any improvements you made.
+
     implementation "org.springframework.boot:spring-boot-starter-actuator"
-    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+//   REMOVED THIS: NOT REQUIRED: implementation "org.springframework.boot:spring-boot-starter-data-jpa"
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.cloud:spring-cloud-starter-config"
-    implementation "org.springframework.boot:spring-boot-starter-webflux"
-    implementation "org.springframework.boot:spring-boot-starter-aop"
+//   REMOVED THIS: NOT REQUIRED: implementation "org.springframework.boot:spring-boot-starter-webflux"
+//   REMOVED THIS: NOT REQUIRED: implementation "org.springframework.boot:spring-boot-starter-aop"
     implementation "io.micrometer:micrometer-tracing-bridge-brave"
     implementation "io.micrometer:micrometer-tracing"
     implementation "io.micrometer:micrometer-registry-prometheus"
     implementation "io.micrometer:context-propagation"
-    implementation "org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j"
-    implementation "org.springframework.cloud:spring-cloud-starter-config"
+// REMOVED THIS: As we've not implemented any Reliability & Fault Tolerance feature in this project: implementation "org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j"
+// REMOVED THIS: ALREADY DEFINED: implementation "org.springframework.cloud:spring-cloud-starter-config"
     implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springdocVersion}"
 
     developmentOnly "org.springframework.boot:spring-boot-devtools"
     runtimeOnly "io.micrometer:micrometer-registry-prometheus"
 
-
     implementation "org.slf4j:slf4j-api:${slf4jVersion}"
     implementation "ch.qos.logback:logback-core:${logbackVersion}"
     implementation "ch.qos.logback:logback-classic:${logbackVersion}"
 
+
+    // for spring security
+    testImplementation 'org.springframework.security:spring-security-test'
+    // added for wiremock tests
+    testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-stub-runner'
+
     testImplementation "org.springframework.boot:spring-boot-starter-test"
-    testImplementation "io.projectreactor:reactor-test"
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 dependencyManagement {
