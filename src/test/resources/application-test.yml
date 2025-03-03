@@ -1,0 +1,14 @@
+#spring:
+#  security:
+#    user:
+#      name: test_user
+#      password: test_password
+#      roles: ACTUATOR_ADMIN
+
+api:
+  base:
+    url: http://localhost:${wiremock.server.port}
+  posts:
+    url: ${api.base.url}/posts
+  comments:
+    url: ${api.base.url}/comments
